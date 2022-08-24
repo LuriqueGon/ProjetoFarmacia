@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FavIcon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="styles/configManager.css">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <title>Farmacia | ... |</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menuOptionList">
+                <li class="menuOption">
+                    <a href="index.html">Consulta</a>
+                </li>
+                <li class="menuOption focus">
+                    <a href="vendas.html">Venda</a>
+                </li>
+                <li class="menuOption">
+                    <a href="estoque.html">Estoque</a>
+                </li>
+                <li class="menuOption">
+                    <a href="config.html">Configurações</a>
+                </li>
+                <li class="menuOption">
+                    <a href="historico.html">Historico</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="SessaoVendas">
+        <h1>Controle de Vendas</h1>
+        <div class="InputGroup">
+            <div class="InputLine">
+                <label for="vendasCDB">Codigo de Barras </label>
+                <input type="number" id="vendasCDB" placeholder="Insira o nome do Produto">
+            </div>
+            <div class="InputLine">
+                <label for="ProdutoName">Produto </label>
+                <input type="text" class="disable" id="ProdutoName" placeholder="Insira o nome do Produto" disabled>
+            </div>
+            
+            <div class="InputLine">
+                <label for="ProdutoValor">Valor ( Unidade ) </label>
+                <input type="number" id="ProdutoValor" min="1" placeholder="Insira o valor do Produto">
+            </div>
+            <div class="InputLine">
+                <label for="ProdutoQuantidade">Quantidade </label>
+                <input type="number" id="ProdutoQuantidade" min="1" placeholder="Insira a quantidade do Produto">
+            </div>
+            
+            <div class="btn-group">
+                <button class="btn BtnSalvar" id="btn1">Salvar</button>
+                <button class="btn BtnCancelar" >Cancelar</button>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Valor Unidade</th>
+                    <th>Valor Todos</th>
+                    <th>Ação</th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>Diazepan</td>
+                    <td>5</td>
+                    <td>R$ 2,50</td>
+                    <td>R$ 12,50</td>
+                    <td class="Icon">
+                        <i class="fa-solid fa-pen-to-square" id="Edit" ></i>
+                        <i class="fa-solid fa-xmark" id="Re"></i>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="Tbody"></tbody>            
+        </table>
+        <div class="ValorTotal">
+            Valor Total : <span id="Total">R$ 0,00</span>
+        </div>
+        <div class="ApagarTudo">
+            Limpar Tabela
+        </div>
+        
+    </main>
+    <footer></footer>
+</body>
+</html>

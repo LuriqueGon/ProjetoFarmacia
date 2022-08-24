@@ -1,0 +1,42 @@
+*{
+    list-style: none;
+    color: inherit;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    outline: none;
+}
+
+.focus{
+    background-color: black;
+    color: white;
+}
+.focus:hover{
+    background-color: black;
+    color: white;
+}
+table, th, td{
+    border: 1px solid;
+    border-collapse: collapse;
+}
+td, th{
+    padding: .5rem;
+}
+th{
+    font-size: 1.2rem;
+}
+td{
+    text-align: center;
+}
+.icon{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.3rem;
+    padding: 0.3rem;
+}
+.disable{
+    background-color: black;
+    color: white    ;
+}

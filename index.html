@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FavIcon -->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- ESTILOS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="styles/configManager.css">
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link rel="stylesheet" href="styles/style.css">
+
+    <title>Farmacia | ... |</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="menuOptionList">
+                <li class="menuOption focus">
+                    <a href="index.html">Consulta</a>
+                </li>
+                <li class="menuOption">
+                    <a href="vendas.html">Venda</a>
+                </li>
+                <li class="menuOption">
+                    <a href="estoque.html">Estoque</a>
+                </li>
+                <li class="menuOption">
+                    <a href="config.html">Configurações</a>
+                </li>
+                <li class="menuOption">
+                    <a href="historico.html">Historico</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main class="SessaoConsulta">
+        <div class="content">
+            <div class="box">
+                <h1>Consulta de produtos </h1>
+                <div class="field-group">
+                    <label for="consultaCDB"> Codigo de Barras</label>
+                    <input type="number" id="consultaCDB" >
+                </div>
+                <div class="field-group">
+                    <label for="consultaQuant"> Quantidade </label>
+                    <input type="number" id="consultaQuant" min="1" minlength="1" step="1">
+                </div>
+                <div class="btn">
+                    <button type="button"> Consultar </button>
+                    <button type="button"> Cancelar </button>
+                </div>
+            </div>
+            <div class="respTable">
+                <h1>Tabela de Consultas</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Produto</th>
+                            <th>CDB</th>
+                            <th>Quantidade</th>
+                            <th>ValorUnidade</th>
+                            <th>ValorFinal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0</td>
+                            <td>Diazepan</td>
+                            <td>0101010101010</td>
+                            <td>5</td>
+                            <td>R$ 2,50</td>
+                            <td>R$ 12,50 </td>                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>
