@@ -49,5 +49,8 @@ main.SessaoConsulta .box .btn button{
     cursor: pointer;
 }
 main.SessaoConsulta .respTable{
-    width: 45%;
+    width: 50%;
+}
+main.SessaoConsulta .respTable table{
+    margin: auto;
 }

@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/styleConsulta.css">
 
+    <!-- Scripts  -->
+
+    <script src="../scripts/Consulta.js" defer></script>
+
     <title>Farmacia | ... |</title>
 </head>
 <body>
@@ -51,13 +55,13 @@
                     <label for="consultaCDB"> Codigo de Barras</label>
                     <input type="number" id="consultaCDB" >
                 </div>
-                <div class="field-group">
+                <!-- <div class="field-group">
                     <label for="consultaQuant"> Quantidade </label>
                     <input type="number" id="consultaQuant" min="1" minlength="1" step="1">
-                </div>
+                </div> -->
                 <div class="btn">
-                    <button type="button"> Consultar </button>
-                    <button type="button"> Cancelar </button>
+                    <button type="button "onclick="Consultar()"> Consultar </button>
+                    <button type="button" onclick="Cancelar()"> Cancelar </button>
                 </div>
             </div>
             <div class="respTable">
@@ -65,23 +69,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Id</th>
                             <th>Produto</th>
                             <th>CDB</th>
-                            <th>Quantidade</th>
                             <th>ValorUnidade</th>
-                            <th>ValorFinal</th>
+                            <th>Unidades no Estoque</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>0</td>
-                            <td>Diazepan</td>
-                            <td>0101010101010</td>
-                            <td>5</td>
-                            <td>R$ 2,50</td>
-                            <td>R$ 12,50 </td>                            
-                        </tr>
+                    <tbody id="tBody">
                     </tbody>
                 </table>
             </div>
