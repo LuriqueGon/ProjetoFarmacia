@@ -1,0 +1,65 @@
+main.SessaoEstoque{
+    padding: 5rem 0;
+}
+main.SessaoEstoque .container{
+    padding: 0 14rem;
+}
+main.SessaoEstoque .container .content .boxField{
+    width: 100%;
+    border: 1px solid;
+    padding: 1rem;
+    border-radius: 2rem 1rem 1rem 0rem;
+}
+main.SessaoEstoque .container .content .boxField .fieldLine{
+    width: 100%;
+}
+main.SessaoEstoque .container .content .boxField .fieldLine label{
+    padding: 0 .5rem;
+    font-size: 1.4rem;
+}
+main.SessaoEstoque .container .content .boxField .fieldLine input{
+    width: 95%;
+    border: 0;
+    border-bottom: 3px solid;
+    padding: .5rem 1rem;
+    margin: 1rem auto;
+    font-size: 1.2rem;
+}
+
+main.SessaoEstoque .container .content .boxField .btn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+main.SessaoEstoque .container .content .boxField .btn button{
+    width: 25%;
+    height: 3rem;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 2rem auto;
+    cursor: pointer;
+}
+main.SessaoEstoque table{
+    width: 100%;
+    margin: 5rem 0 0 0;
+}
+main.SessaoEstoque table th{
+    background-color: #ccc;
+    border: 2px solid #ccc;
+}
+main.SessaoEstoque table td{
+    border: 2px solid #ccc;
+}
+main.SessaoEstoque table td.Icon i{
+    cursor: pointer;
+    transition: all .3s;
+    font-size: 1.7rem;
+    margin: 0 .5rem;
+}
+main.SessaoEstoque table td.Icon i:nth-child(1):hover{
+    color: green;
+}
+main.SessaoEstoque table td.Icon i:nth-child(2):hover{
+    color: red;
+}

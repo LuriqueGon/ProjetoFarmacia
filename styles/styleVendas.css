@@ -1,0 +1,146 @@
+main.SessaoVendas{
+    background-color: #fafbfc;
+    padding: 1rem 5rem;
+}
+main.SessaoVendas .InputGroup{
+    width: 90%;
+    margin: 1rem auto;
+    border: 1px solid rgb(161, 161, 161);
+    padding: .8rem;
+    border-radius: 1rem;
+}
+main.SessaoVendas .InputGroup .InputLine{
+    display: grid;
+    margin-bottom: 0.5rem;
+    padding: 1rem 1rem 0 1rem;
+}
+main.SessaoVendas .InputGroup .InputLine label{
+    font-size: 1.5rem;
+}
+main.SessaoVendas .InputGroup .InputLine input{
+    padding: 0.8rem;
+    border: 1px solid rgb(158, 158, 158);
+    border-radius: 0.25rem;
+}
+main.SessaoVendas .btn-group{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+main.SessaoVendas button{
+    width: 25%;
+    height: 3rem;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 1rem auto;
+    cursor: pointer;
+}
+main.SessaoVendas table{
+    width: 100%;
+}
+main.SessaoVendas table th{
+    background-color: #ccc;
+    border: 2px solid #ccc;
+}
+main.SessaoVendas table td{
+    border: 2px solid #ccc;
+}
+main.SessaoVendas table td.Icon i{
+    cursor: pointer;
+    transition: all .3s;
+    font-size: 1.7rem;
+    margin: 0 .5rem;
+}
+main.SessaoVendas table td.Icon i:nth-child(1):hover{
+    color: green;
+}
+main.SessaoVendas table td.Icon i:nth-child(2):hover{
+    color: red;
+}
+main.SessaoVendas .ValorTotal{
+    font-size: 1.35rem;
+    font-weight: bold;
+    border: 1px solid rgba(85, 85, 85, 0.589);
+    width: 17rem;
+    text-align: center;
+    position: fixed;
+    bottom: 1rem;
+    right: 5rem;
+}
+main.SessaoVendas .ValorTotal #Total{
+    font-weight: normal;
+}
+main.SessaoVendas .ApagarTudo{
+    font-size: 1.35rem;
+    font-weight: bold;
+    border: 1px solid rgba(85, 85, 85, 0.589);
+    width: 17rem;
+    text-align: center;
+    position: fixed;
+    bottom: 1rem;
+    left: 5rem;
+    cursor: pointer;
+    background-color: rgba(48, 45, 45, 0.651);
+    color: white;
+}
+main.SessaoVendas .ApagarTudo:hover{
+    background-color: #000;
+}
+
+
+/* MEDIA QUERIES */
+
+@media (max-width : 600px){
+    .ApagarTudo{
+        top: 1rem;
+        bottom: auto;
+        font-size: 1.2rem;
+        vertical-align: middle;
+        text-align: center;
+        width: 10rem;
+        border-radius: 1rem;
+        left: 1rem;
+        background-color: rgba(48, 45, 45, 0.651);
+    }
+    .ApagarTudo:hover{
+        background-color: #000;
+    }
+    .ValorTotal{       
+        right: 1rem;
+        left: auto;
+        bottom: auto;
+        top: 1rem;
+        font-size: 1rem;
+        width: 11rem;
+        background-color: #000;
+        color: white;
+        border: 2px solid rgb(235, 194, 194);
+    }
+    .ValorTotal #Total {
+        font-size: .8rem;
+    }
+    main{
+        padding: 2rem 1rem;
+        width: 90%;
+    }
+    main h1, main p{
+        text-align: center;
+    }
+    .btn-group{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    table{
+        width: 105%;
+    }
+    th,td{
+        border: 1px solid black;
+        height: 3.2rem;
+        vertical-align: middle;
+        font-size: .9rem;
+    }
+    td.Icon{
+        flex-direction: column;
+    }
+}

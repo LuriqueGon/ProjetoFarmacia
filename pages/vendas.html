@@ -6,17 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- FavIcon -->
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link rel="shortcut icon" href="../favico/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favico/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favico/favicon-16x16.png">
+    <link rel="manifest" href="../favico/site.webmanifest">
 
     <!-- ESTILOS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-    <link rel="stylesheet" href="styles/configManager.css">
+    <link rel="stylesheet" href="../styles/configManager.css">
     <link rel="stylesheet" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/styleVendas.css">
 
     <title>Farmacia | ... |</title>
 </head>
@@ -51,7 +52,7 @@
             </div>
             <div class="InputLine">
                 <label for="ProdutoName">Produto </label>
-                <input type="text" class="disable" id="ProdutoName" placeholder="Insira o nome do Produto" disabled>
+                <input type="text" class="disable" id="ProdutoName" disabled>
             </div>
             
             <div class="InputLine">
@@ -64,8 +65,9 @@
             </div>
             
             <div class="btn-group">
-                <button class="btn BtnSalvar" id="btn1">Salvar</button>
+                <button class="btn BtnSalvar" id="btn1">Adicionar</button>
                 <button class="btn BtnCancelar" >Cancelar</button>
+                <button class="btn BtnSalvar" id="btn1">Finalizar Vendas</button>
             </div>
         </div>
         <table>
@@ -77,7 +79,9 @@
                     <th>Valor Unidade</th>
                     <th>Valor Todos</th>
                     <th>Ação</th>
-                </tr>
+                </tr>                
+            </thead>
+            <tbody id="tBody">
                 <tr>
                     <td>0</td>
                     <td>Diazepan</td>
@@ -86,19 +90,19 @@
                     <td>R$ 12,50</td>
                     <td class="Icon">
                         <i class="fa-solid fa-pen-to-square" id="Edit" ></i>
-                        <i class="fa-solid fa-xmark" id="Re"></i>
+                        <i class="fa-solid fa-xmark" id="Remove"></i>
                     </td>
                 </tr>
-            </thead>
-            <tbody id="Tbody"></tbody>            
+            </tbody>            
         </table>
         <div class="ValorTotal">
             Valor Total : <span id="Total">R$ 0,00</span>
         </div>
         <div class="ApagarTudo">
-            Limpar Tabela
+            Limpar Vendas
         </div>
-        
+        <div class="print"></div>
+        <div class="fimVendas"></div>
     </main>
     <footer></footer>
 </body>
