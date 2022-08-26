@@ -38,6 +38,7 @@ main.SessaoVendas button{
 }
 main.SessaoVendas table{
     width: 100%;
+    margin: 2rem 0 5rem 0;
 }
 main.SessaoVendas table th{
     background-color: #ccc;

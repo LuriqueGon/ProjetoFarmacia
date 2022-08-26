@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/styleVendas.css">
 
+    <!-- Scripts -->
+
+    <script src="../scripts/Vendas.js" defer></script> 
+
     <title>Farmacia | ... |</title>
 </head>
 <body>
@@ -48,7 +52,11 @@
         <div class="InputGroup">
             <div class="InputLine">
                 <label for="vendasCDB">Codigo de Barras </label>
-                <input type="number" id="vendasCDB" placeholder="Insira o nome do Produto">
+                <input type="number" id="vendasCDB" placeholder="Insira o nome do Produto" onchange="AtualizarProdutos()">
+            </div>
+            <div class="InputLine">
+                <label for="ProdutoQuantidade">Quantidade </label>
+                <input type="number" id="ProdutoQuantidade" min="1" placeholder="Insira a quantidade do Produto">
             </div>
             <div class="InputLine">
                 <label for="ProdutoName">Produto </label>
@@ -57,17 +65,13 @@
             
             <div class="InputLine">
                 <label for="ProdutoValor">Valor ( Unidade ) </label>
-                <input type="number" id="ProdutoValor" min="1" placeholder="Insira o valor do Produto">
-            </div>
-            <div class="InputLine">
-                <label for="ProdutoQuantidade">Quantidade </label>
-                <input type="number" id="ProdutoQuantidade" min="1" placeholder="Insira a quantidade do Produto">
+                <input type="text" class="disable" id="ProdutoValor" min="1" disabled>
             </div>
             
             <div class="btn-group">
-                <button class="btn BtnSalvar" id="btn1">Adicionar</button>
-                <button class="btn BtnCancelar" >Cancelar</button>
-                <button class="btn BtnSalvar" id="btn1">Finalizar Vendas</button>
+                <button class="btn BtnSalvar" id="btn1" onclick="AdicionarItem()">Adicionar</button>
+                <button class="btn BtnCancelar" onclick="Cancelar()">Cancelar</button>
+                <button class="btn BtnSalvar" id="btn1" onclick="FinalizarCompras()">Finalizar Vendas</button>
             </div>
         </div>
         <table>
@@ -75,30 +79,20 @@
                 <tr>
                     <th>Id</th>
                     <th>Produto</th>
-                    <th>Quantidade</th>
                     <th>Valor Unidade</th>
+                    <th>Quantidade</th>
                     <th>Valor Todos</th>
                     <th>Ação</th>
                 </tr>                
             </thead>
             <tbody id="tBody">
-                <tr>
-                    <td>0</td>
-                    <td>Diazepan</td>
-                    <td>5</td>
-                    <td>R$ 2,50</td>
-                    <td>R$ 12,50</td>
-                    <td class="Icon">
-                        <i class="fa-solid fa-pen-to-square" id="Edit" ></i>
-                        <i class="fa-solid fa-xmark" id="Remove"></i>
-                    </td>
-                </tr>
+                
             </tbody>            
         </table>
         <div class="ValorTotal">
-            Valor Total : <span id="Total">R$ 0,00</span>
+            Valor Total : R$ <span id="total">0.00</span>
         </div>
-        <div class="ApagarTudo">
+        <div class="ApagarTudo" onclick="LimparVendar()">
             Limpar Vendas
         </div>
         <div class="print"></div>
