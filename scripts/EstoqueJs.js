@@ -2,6 +2,7 @@
 
 let Edit = false
 let IndexEdit = null
+let IndexStop = null
 
 const SetLocalStorage = (dbTempItem) => localStorage.setItem("dbItem", JSON.stringify(dbTempItem))
 const GetLocalStorage = () =>JSON.parse(localStorage.getItem('dbItem'))??[]
@@ -9,12 +10,22 @@ const GetLocalStorage = () =>JSON.parse(localStorage.getItem('dbItem'))??[]
 // CREATE
 
 function CreateItem (Item) {
-    const dbTempItem = GetLocalStorage()
-    if(ChecarItem(Item) == true){
+
+    let dbTempItem = GetLocalStorage()
+
+    ChecarItem(Item)
+
+    if(IndexStop == null){
         dbTempItem.push(Item)
-        SetLocalStorage(dbTempItem)        
-        CreateTable(dbTempItem)
+        
+    }else{  
+
+        dbTempItem[IndexStop].Quant += Number(document.querySelector('#EstoqueQuant').value)
+        
     }
+
+    SetLocalStorage(dbTempItem)        
+    CreateTable(dbTempItem)
 }
 
 function CreateTable(dbTempItem) {
@@ -23,9 +34,7 @@ function CreateTable(dbTempItem) {
 
     if(dbTempItem[0] != ""){
         for(let i = 0; i<dbTempItem.length; i++){
-            console.log(i)
-            console.log(dbTempItem.length)
-            console.log(dbTempItem[i])
+            
             tBody.innerHTML += `<tr><td>${i}</td><td>${dbTempItem[i].prodName}</td><td>${dbTempItem[i].CDB}</td><td>${dbTempItem[i].Quant}</td><td>R$ ${dbTempItem[i].valorUni.toFixed(2)}</td><td>R$ ${(dbTempItem[i].Quant * dbTempItem[i].valorUni).toFixed(2)}</td><td class="Icon"><i class="fa-solid fa-pen-to-square" id="Edit" onclick="Editar(${i})"></i><i class="fa-solid fa-xmark" id="Remove" onclick="Remover(${i})"></i></td></tr>`            
         }
     }
@@ -38,33 +47,52 @@ function SepararDados(){
 
     let prodName = document.querySelector('#EstoqueName').value 
     let CDB = document.querySelector('#EstoqueCBD').value 
-    let quant = Number(document.querySelector('#EstoqueQuant').value)
+    let Quant = Number(document.querySelector('#EstoqueQuant').value)
     let valorUni = Number(document.querySelector('#EstoqueValue').value)
 
     if(Edit == false){    
-        if(IsValid(prodName, CDB, quant, valorUni) == true){
 
-            const layoutTempItem = {
-                prodName : prodName,
-                CDB : CDB,
-                Quant : quant,
-                valorUni : valorUni 
-            }
+        const layoutTempItem = {
+            prodName : prodName,
+            CDB : CDB,
+            Quant : Quant,
+            valorUni : valorUni 
+        }
+
+        if(ChecarItem(layoutTempItem) == false){
+            console.log(Quant)
         
             CreateItem(layoutTempItem)
             Cancelar()
+        
+
 
         }else{
-            alert("Há Algum dado errado, ou ausente")
+            if(IsValid(prodName, CDB, Quant, valorUni) == true){
+
+                const layoutTempItem = {
+                    prodName : prodName,
+                    CDB : CDB,
+                    Quant : Quant,
+                    valorUni : valorUni 
+                }
+            
+                CreateItem(layoutTempItem)
+                Cancelar()
+    
+            }else{
+                alert("Há Algum dado errado, ou ausente")
+            }
         }
+        
 
     }else{
-        if(IsValid(prodName, CDB, quant, valorUni) == true){
+        if(IsValid(prodName, CDB, Quant, valorUni) == true){
 
             const layoutTempItem = {
                 prodName : prodName,
                 CDB : CDB,
-                Quant : quant,
+                Quant : Quant,
                 valorUni : valorUni 
             }
 
@@ -93,6 +121,7 @@ function Cancelar(){
     document.querySelector('#EstoqueCBD').focus()
     Edit = false
     IndexEdit = null
+    IndexStop = null
     AlterarButton()
 }
 
@@ -106,7 +135,7 @@ function Editar(i){
     document.querySelector('#EstoqueName').value = dbTempItem[i].prodName
     document.querySelector('#EstoqueCBD').value = dbTempItem[i].CDB
     document.querySelector('#EstoqueQuant').value = dbTempItem[i].Quant
-    document.querySelector('#EstoqueValue').value =  dbTempItem[i].valorUni   
+    document.querySelector('#EstoqueValue').value =  dbTempItem[i].valorUni.toFixed(2)   
 
     return IndexEdit = i
 }
@@ -115,7 +144,6 @@ function Remover(i){
     if(confirm("Você tem certeza que deseja apagar o item ", i, "Do seu Estoque?")){
         const dbTempItem = GetLocalStorage()
         dbTempItem.splice(i, 1)
-        console.log(dbTempItem)
         SetLocalStorage(dbTempItem)
         OnloadCreateTable()
         document.querySelector('#EstoqueCBD').focus()
@@ -143,26 +171,19 @@ function ChecarItem (Item){
 
     const dbTempItem = GetLocalStorage()
 
-    for(let i = 0; i<dbTempItem.length; i++){
-
-        if(dbTempItem[i].prodName.toUpperCase() == Item.prodName.toUpperCase()){
-            if(!confirm("Já existe um Item com esse Nome, deseja Realmente Adiciona-lo??")){
-                return false
-            }
-        }
-        
+    for(let i = 0; i<dbTempItem.length; i++){       
 
         if(dbTempItem[i].CDB == Item.CDB){
-            alert("Já existe um Item com esse Codigo de Barrra, deseja Realmente Adiciona-lo??")   
-            return false            
+            
+            return IndexStop = i, false
         }
 
     }
     return true
 }
 
-function IsValid(prodName, CDB, quant, valorUni){
-    if(prodName != "" && CDB != "" && quant != "" && valorUni != ""){
+function IsValid(prodName, CDB, Quant, valorUni){
+    if(prodName != "" && CDB != "" && Quant != "" && valorUni != ""){
         return true
     }else{
         return false
