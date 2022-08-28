@@ -6,6 +6,7 @@
     padding: 0;
     font-size: 16px;
     outline: none;
+    z-index: 1;
 }
 
 .focus{

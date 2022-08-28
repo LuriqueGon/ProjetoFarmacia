@@ -175,10 +175,6 @@ function AtualizarSoma(){
     document.querySelector('#total').textContent = soma.toFixed(2)
 }
 
-function FinalizarCompras(){
-
-}
-
 document.querySelector('#vendasCDB').addEventListener('keypress', function(e){
     console.log(e.key)
     switch (e.key) {
@@ -266,5 +262,15 @@ document.body.addEventListener('keyup', function(e){
         AtualizarProdutos()
     }
 })
+
+function FinalizarCompras(){
+    document.querySelector('.modal').classList.add('FinalizarVendas')
+    document.querySelector('header').classList.add('FinalizarVendas')
+}
+
+function CancelarModal(){
+    document.querySelector('.modal').classList.remove('FinalizarVendas')
+    document.querySelector('header').classList.remove('FinalizarVendas')
+}
 
 AtualizarTabela()

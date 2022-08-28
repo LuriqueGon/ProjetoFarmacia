@@ -1,3 +1,11 @@
+body.FinalizarVendas, header.FinalizarVendas, header.FinalizarVendas nav ul li a{
+    z-index: -10;
+    background-color: rgba(0, 0, 0, 0.9)!important;
+    opacity: .7!important;
+    color: black;
+    overflow-y: hidden;
+}
+
 main.SessaoVendas{
     background-color: #fafbfc;
     padding: 1rem 5rem;
@@ -90,6 +98,180 @@ main.SessaoVendas .ApagarTudo:hover{
     background-color: #000;
 }
 
+.modal{
+    width: 0;
+    height: 0;
+    display: none;
+    opacity: 1;
+}
+.modal.FinalizarVendas{
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1!important;
+    top: 0%;
+    left: 0;
+    color: white;
+    background-color: #49484873;
+    overflow-y: scroll;
+    display: flex;
+    justify-content: space-between
+}
+.modal .container, .modal .boxModal{
+    width: 30rem;
+    padding: 1.5rem;
+    background-color: white;
+    color: black;
+    margin: 5rem auto;
+    font-family: Arial, Helvetica, sans-serif;    
+}
+.modal .container h1{
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .3rem;
+}
+.modal .container hr{
+    margin: 1rem 0;
+}
+.modal .container span{
+    font-size: 1rem;
+    font-weight: normal;
+}
+.modal .container p{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.modal .container .printModal{
+    position: relative;
+}
+.modal .container .printModal .info .enderecoInfo{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.modal .container .printModal .info .enderecoInfo p{
+    padding: 0 .3rem;
+}
+.modal .container .printModal .info .divInfo{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 7rem 0 1rem;
+}
+.modal .container .printModal .info .consumidorInf{
+    margin: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+.modal .container .printModal .pagamentoInfo{
+    margin: 3rem 0;
+}
+.modal .container .printModal .pagamentoInfo span{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.modal .container .printModal .pagamentoInfo #TotalValuePrint{
+    font-size: 1.6rem;
+    position: absolute;
+    bottom: 3%;
+    right: 5%;
+    text-transform: uppercase;    
+}
+.modal .container .printModal .pagamentoInfo #TotalValuePrint span{
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+.modal .container .printModal table, .modal .container .printModal table thead{
+    width: 100%;
+    font-size: 1rem;
+}
+.modal .container .printModal table thead tr th:nth-child(1){
+    width: 10%;
+}
+.modal .container .printModal table thead tr th:nth-child(2){
+    width: 25%;
+}
+.modal .container .printModal table tbody td, .modal .container .printModal table tbody tr, .modal .container .printModal table{
+    border: 0;
+}
+.modal .container .printModal table tbody td{
+    font-size: .7rem;
+}
+.modal .boxModal{    
+    width: 30rem;
+    z-index: 2;
+    /* height: 20rem; */
+}
+.modal .boxModal .MetodoDePagamento, .modal .boxModal .fieldLineCartao, .modal .boxModal .fieldLineParcelamento{
+    margin: 0rem auto 2rem auto;
+    text-align: center;
+}
+.modal .boxModal .MetodoDePagamento select,.modal .boxModal .MetodoDePagamento select option, .modal .boxModal .fieldLineCartao select, .modal .boxModal .fieldLineCartao select option, .modal .boxModal .fieldLineParcelamento select, .modal .boxModal .fieldLineParcelamento select option{
+    padding: .2rem;
+    font-size: 1.4rem;
+    text-align: justify;
+}
+.modal .boxModal .fieldLine{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.modal .boxModal .fieldDisable{
+    display: none;
+}
+.modal .boxModal .fieldLineDinheiroCartao{
+    border: 1px solid;
+}
+.modal .boxModal .fieldLineDinheiroCartao p, .modal .boxModal .fieldLineDinheiroCartao span{
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: .5rem 0;
+    padding: .2rem 1rem;
+}
+.modal .boxModal .fieldLine p{
+    display: flex;
+    padding: .5rem;
+
+}
+.modal .boxModal .fieldLine p label{
+    font-size: 1.4rem;
+
+}
+.modal .boxModal .fieldLine input{
+    width: 5rem;
+    margin: 0 1rem;
+}
+.modal .boxModal .Pix p{
+    text-align: center;
+    font-size: 1.2rem;
+}
+.modal .boxModal .btn{
+    display: flex;
+    justify-content: space-around;
+    margin: 2rem 0;
+}
+.modal .boxModal .btn button{
+    padding: .3rem 1rem;
+    font-size: 1.2rem;
+    color: white;
+    text-shadow: .1rem .2rem .2rem black;
+    border: 0;
+    cursor: pointer;
+    opacity: .9;
+
+}
+.modal .boxModal .btn button:nth-child(1){
+    background-color: green;
+}
+.modal .boxModal .btn button:nth-child(2){
+    background-color: red;
+}
+.modal .boxModal .btn button:hover{
+    opacity: 1;
+    box-shadow: .1rem .1rem .5rem black;
+
+}
 
 /* MEDIA QUERIES */
 
