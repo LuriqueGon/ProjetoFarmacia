@@ -471,4 +471,4 @@ function AtualizarCPF(){
 }
 
 AtualizarTabela()
-FinalizarCompras()
+// FinalizarCompras()
