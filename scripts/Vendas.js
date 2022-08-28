@@ -8,6 +8,10 @@ let IsValid = false
 let IsExistedItem = false
 let Edit = false
 let EditIndex = null
+let SomaFinal = null
+let Data = new Date
+let Hora = new Date
+let FimDeVendas = ""
 
 function AtualizarProdutos(){
     if(String(document.querySelector('#vendasCDB').value.length) == CDBRange){        
@@ -154,16 +158,16 @@ function AtualizarTabela(){
     if(TempItemList != []){
         
         for(let i=0; i<TempItemList.length; i++){
-            tBody.innerHTML += `<tr><td>${i}</td><td>${TempItemList[i].prodName}</td><td>R$ ${TempItemList[i].valorUni.toFixed(2)}</td><td>${TempItemList[i].QuantVendas}</td><td>R$ ${(TempItemList[i].valorUni * TempItemList[i].QuantVendas).toFixed(2)}</td><td class="Icon"><i class="fa-solid fa-pen-to-square" id="Edit${i}" onclick="Editar(${i})"></i><i class="fa-solid fa-xmark" id="Remove${i}"onclick="Remover(${i})"></i></td></tr>`
+            tBody.innerHTML += `<tr><td>${i}</td><td>${TempItemList[i].prodName}</td><td>R$ ${TempItemList[i].valorUni.toFixed(2).toString().replace('.',',')}</td><td>${TempItemList[i].QuantVendas}</td><td>R$ ${(TempItemList[i].valorUni * TempItemList[i].QuantVendas).toFixed(2).toString().replace('.',',')}</td><td class="Icon"><i class="fa-solid fa-pen-to-square" id="Edit${i}" onclick="Editar(${i})"></i><i class="fa-solid fa-xmark" id="Remove${i}"onclick="Remover(${i})"></i></td></tr>`
         }
-        AtualizarSoma()
+        AtualizarSoma(document.querySelector('#total'))
         Cancelar()
     }
 
 
 }
 
-function AtualizarSoma(){
+function AtualizarSoma(locage){
     const TempItemList = GetLocalStorageTemp()    
 
     let soma = 0
@@ -172,7 +176,8 @@ function AtualizarSoma(){
         soma += (TempItemList[i].valorUni * TempItemList[i].QuantVendas)
     }
 
-    document.querySelector('#total').textContent = soma.toFixed(2)
+    locage.textContent = soma.toFixed(2).toString().replace('.',',').toString().replace('.',',')
+    return soma
 }
 
 document.querySelector('#vendasCDB').addEventListener('keypress', function(e){
@@ -266,6 +271,54 @@ document.body.addEventListener('keyup', function(e){
 function FinalizarCompras(){
     document.querySelector('.modal').classList.add('FinalizarVendas')
     document.querySelector('header').classList.add('FinalizarVendas')
+    GerirNota()
+    GerirDataHora()
+}
+
+function GerirNota(){
+    const TempItemList = GetLocalStorageTemp()
+    const tBody = document.querySelector('#tBodyPrint')
+    tBody.innerHTML = ""
+
+    for(let i=0; i<TempItemList.length; i++){
+        tBody.innerHTML += ` <tr><td>${i}</td><td>${TempItemList[i].CDB}</td><td>${TempItemList[i].QuantVendas} Uni  ${TempItemList[i].prodName}</td><td>R$ ${(TempItemList[i].QuantVendas * TempItemList[i].valorUni).toFixed(2).toString().replace('.',',')}</td></tr>`
+    }
+    AtualizarSoma(document.querySelector('#ValorTotalPrint'))
+
+}
+
+function GerirDataHora(){
+    // Data = `${Data.getDate()} / ${Data.getMonth()+1} / ${Data.getFullYear()}`
+    // Hora = `${Hora.getHours()} : ${Hora.getMinutes()}`
+    let DataNow = ""
+    let HoraNow = ""
+    if(Data.getDate() < 10){
+        DataNow = `0${Data.getDate()} /`
+    }else{
+        DataNow = `${Data.getDate()} /`
+    }
+    if(Data.getMonth()+1 < 10){
+        DataNow += ` 0${Data.getMonth()+1} /`
+    }else{
+        DataNow += ` ${Data.getMonth()+1} /`
+    }
+
+    DataNow += ` ${Data.getFullYear()}`
+
+    if(Hora.getHours() < 10){
+        HoraNow = `0${Data.getHours()} :`
+    }else{
+        HoraNow = `${Data.getHours()} :`
+    }
+    if(Hora.getMinutes() < 10){
+        HoraNow += ` 0${Hora.getMinutes()}`
+    }else{
+        HoraNow += ` ${Hora.getMinutes()}`
+    }
+
+    console.log(HoraNow)
+    document.querySelector('#DataPrint').textContent = DataNow
+    document.querySelector('#HoraPrint').textContent = HoraNow
 }
 
 function CancelarModal(){
@@ -273,4 +326,149 @@ function CancelarModal(){
     document.querySelector('header').classList.remove('FinalizarVendas')
 }
 
+function MetodoDePagamento(){
+    let MDP = document.querySelector('#selectMDP').value
+    switch (MDP) {
+        case "MDP":
+            DesativarTudo()
+            DesativarMDP()
+            break;
+        case "01":
+            LiberarSistemaDinheiro()
+            FimDeVendas = "Dinheiro"
+            break;
+        case "02":
+            LiberarSistemaCartao()
+            FimDeVendas  = "Cartao"
+            break;
+        case "03":
+            LiberarSistemaPix()
+            FimDeVendas = "Pix"
+            break;
+        
+        default:
+            break;
+    }
+}
+
+function DesativarTudo(){
+    document.querySelector('.fieldLineCartao').classList.add('fieldDisable')
+    document.querySelector('.Pix').classList.add('fieldDisable')
+    document.querySelector('.fieldLineParcelamento').classList.add('fieldDisable')
+    document.querySelector('.fieldLineDinheiro').classList.add('fieldDisable')
+    document.querySelector('.FimDaCompra').classList.add('fieldDisable')    
+    document.querySelector('#TrocoPrintValue').value = ""
+    document.querySelector('#TrocoPrint').textContent = "00,00"
+    document.querySelector('#PagoPrint').textContent = "00,00"
+    document.querySelector('#ValorPagoPrint').value = ""
+    document.querySelector('#CPFPrint').value = ""
+    document.querySelector('#CpfAlterar').textContent = "000.000.000-00"
+}
+
+function DesativarMDP(){
+    document.querySelector('#selectCartao').value = "MDP"
+    document.querySelector('#selectMDP').value = "MDP"
+    document.querySelector('#selectCartaoParcela').value = "MDP"
+
+}
+
+function LiberarSistemaDinheiro(){
+    DesativarTudo()    
+    document.querySelector('.fieldLineDinheiro').classList.remove('fieldDisable')
+    document.querySelector('.FimDaCompra').classList.remove('fieldDisable')
+}
+
+function LiberarSistemaCartao(){
+    DesativarTudo()    
+    document.querySelector('.fieldLineCartao').classList.remove('fieldDisable')
+}
+
+function LiberarSistemaPix(){
+    DesativarTudo()    
+    document.querySelector('.Pix').classList.remove('fieldDisable')
+    document.querySelector('.FimDaCompra').classList.remove('fieldDisable')
+    document.querySelector('#PagoPrint').textContent = document.querySelector('#ValorTotalPrint').textContent
+}
+
+function LiberarSistemaTipoCartao(){
+    let TipoCartao = document.querySelector('#selectCartao').value
+    switch (TipoCartao) {
+        case "MDP":
+            DesativarTudo()
+            DesativarMDP()
+            break;
+        case "01":
+            LiberarSistemaDebito()            
+            break;
+        case "02":
+            LiberarSistemaCredito()
+            break;
+        
+        default:
+            break;
+    }
+}
+
+function LiberarSistemaDebito(){
+    document.querySelector('#PagoPrint').textContent = document.querySelector('#ValorTotalPrint').textContent
+    document.querySelector('.FimDaCompra').classList.remove('fieldDisable')
+}
+function LiberarSistemaCredito(){
+    document.querySelector('.fieldLineParcelamento').classList.remove('fieldDisable')
+    document.querySelector('#PagoPrint').textContent = document.querySelector('#ValorTotalPrint').textContent
+}
+
+function LiberarSistemaParcelas(){
+    let Parcelas = document.querySelector('#selectCartaoParcela').value
+    document.querySelector('.FimDaCompra').classList.remove('fieldDisable')
+}
+
+function FinalizarVendasPrint(){
+    if(FimDeVendas == "Dinheiro"){
+        if(document.querySelector('#ValorPagoPrint').value != ""){
+            console.log("Dinheiro")
+            let ValorPago = Number(document.querySelector('#ValorPagoPrint').value)
+            let ValorFinal = Number(document.querySelector('#ValorTotalPrint').textContent.toString().replace(',','.'))
+            let Troco = (ValorPago - ValorFinal).toFixed(2).toString().replace('.',',')
+            
+            document.querySelector('#TrocoPrintValue').value = Troco
+            document.querySelector('#TrocoPrint').textContent = Troco
+            document.querySelector('#PagoPrint').textContent = ValorPago.toFixed(2).toString().replace('.',',')
+            console.log(Troco)
+
+            
+        }
+    }else if(FimDeVendas == "Cartao"){
+
+    }else if(FimDeVendas == "Pix"){
+
+    }else{
+        alert("Defina o tipo de pagamento")
+    }
+}
+
+function AtualizarCPF(){
+    document.querySelector('#CpfAlterar').textContent = ""
+    if(document.querySelector('#CPFPrint').value.toString().length == 11){
+        for(let i = 0; i<11; i++){
+            if(i == 2 || i == 5){
+                document.querySelector('#CpfAlterar').textContent += document.querySelector('#CPFPrint').value.toString()[i]
+                document.querySelector('#CpfAlterar').textContent += '.'
+            }else if( i == 8){
+                document.querySelector('#CpfAlterar').textContent += document.querySelector('#CPFPrint').value.toString()[i]
+                document.querySelector('#CpfAlterar').textContent += '-'
+            }else{
+                document.querySelector('#CpfAlterar').textContent += document.querySelector('#CPFPrint').value.toString()[i]
+            }
+        }
+    }
+    if(document.querySelector('#CpfAlterar').textContent == ""){
+        document.querySelector('#CpfAlterar').textContent = "000.000.000-00"
+    }
+    // document.querySelector('#CpfAlterar').textContent = document.querySelector('#CPFPrint').value.toString()
+    // 000.000.000-00
+    
+}
+
 AtualizarTabela()
+FinalizarCompras()

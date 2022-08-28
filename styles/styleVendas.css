@@ -157,7 +157,14 @@ main.SessaoVendas .ApagarTudo:hover{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: 0 7rem 0 1rem;
+    margin: 0 0rem 0 1rem;
+}
+.modal .container .printModal .info .divInfo .dataInfo span{
+    font-style: italic;
+    font-size: 1.2rem;
+}
+.modal .container .printModal .info .divInfo .dataInfo #DataPrint{
+    margin-right: 2rem;
 }
 .modal .container .printModal .info .consumidorInf{
     margin: 1rem 0;

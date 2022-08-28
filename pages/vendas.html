@@ -124,12 +124,12 @@
                             <p>IM : <span>0000000</span></p>
                         </div>
                         <div class="dataInfo">
-                            <p><span>27/08/22</span> <span>22:46</span></p>
+                            <p><span id="DataPrint">27/08/22</span> <span id="HoraPrint">22:46</span></p>
                         </div>
                     </div>
                     <div class="consumidorInf">
                         <p>Consumidor Nº: <span>0000001</span></p>
-                        <p>CPF / CNPJ : <span>000.000.000-00</span></p>
+                        <p>CPF / CNPJ : <span id="CpfAlterar">000.000.000-00</span></p>
                     </div>
                     <hr>
                 </div>
@@ -144,41 +144,36 @@
                         </tr>
                     </thead>
                     <tbody id="tBodyPrint">
-                        <tr>
-                            <td>01</td>
-                            <td>0101010101011</td>
-                            <td>5 Uni  Paracetamol</td>
-                            <td>R$ 18,75</td>
-                        </tr>
+                       
                         
                     </tbody>
                 </table>
                 <hr>
                 <div class="pagamentoInfo">
-                    <p>Dinheiro - R$<span> 20,00</span></p>
-                    <p>Troco - R$<span> 1,25</span></p>
-                    <p id="TotalValuePrint">Total  R$ <span>18,75</span></p>
+                    <p>Dinheiro - R$<span id="PagoPrint"> 00,00</span></p>
+                    <p>Troco - R$<span id="TrocoPrint"> 00,00</span></p>
+                    <p id="TotalValuePrint">Total  R$ <span id="ValorTotalPrint">18,75</span></p>
                 </div>
             </div>
         </div>
         <div class="boxModal">
             <div class="MetodoDePagamento">
-                <select id="selectMDP">
+                <select id="selectMDP" onchange="MetodoDePagamento()">
                     <option value="MDP">Metodo de Pagamento</option>
-                    <option value="Dinheiro">01 - Dinheiro</option>
-                    <option value="Cartao">02 - Cartão</option>
-                    <option value="Pix">03 - Pix</option>
+                    <option value="01">01 - Dinheiro</option>
+                    <option value="02">02 - Cartão</option>
+                    <option value="03">03 - Pix</option>
                 </select>
             </div>            
             <div class=" fieldLineCartao fieldDisable">
-                <select id="selectCartao">
-                    <option value="TDC">Tipo de Cartão</option>
-                    <option value="Debito">01 - Debito</option>
-                    <option value="Credito">02 - Credito</option>
+                <select id="selectCartao" onchange="LiberarSistemaTipoCartao()">
+                    <option value="MDP">Tipo de Cartão</option>
+                    <option value="01">01 - Debito</option>
+                    <option value="02">02 - Credito</option>
                 </select>
             </div>
             <div class=" fieldLineParcelamento fieldDisable">
-                <select id="selectCartao">
+                <select id="selectCartaoParcela" onchange="LiberarSistemaParcelas()">
                     <option value="MDP">Parcelas</option>
                     <option value="1">01 - 1 Vezes</option>
                     <option value="2">02 - 2 Vezes</option>
@@ -201,16 +196,25 @@
                 
             </div>
             <div class="fieldLine fieldLineDinheiro fieldDisable">
-                <p><label for="">Valor Pago : </label> <input type="number"></p>
-                <p><label for="">Troco : </label> <input type="number"></p>
+                <p><label for="">Valor Pago : </label> <input type="number" id="ValorPagoPrint" onchange="FinalizarVendasPrint()"></p>
+                <p><label for="">Troco : </label> <input type="text" id="TrocoPrintValue" disabled></p>
             </div>
             <div class=" fieldLineDinheiroCartao fieldDisable">
                 <p>Valor Da Compra: R$<span>18,75</span></p>
                 <p>Juros: <span>2% (R$ 3,75)</span></p>
                 <p>Valor Da Total: R$<span>22,50</span></p>
             </div>
+            <div class="FimDaCompra fieldDisable">
+                <p><label for="">CPF do Cliente : </label> <input type="number" id="CPFPrint" onchange="AtualizarCPF()"></p>
+
+            </div>
+            <div class="cartaoFi">
+                <p class="cartaoValorFinal">
+
+                </p>
+            </div>
             <div class="btn">
-                <button>Finalizar Compra</button>
+                <button onclick="FinalizarVendasPrint()">Finalizar Compra</button>
                 <button onclick="CancelarModal()">Cancelar</button>
             </div>
         </div>
